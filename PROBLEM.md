@@ -92,3 +92,5 @@ developing your solution.
 Please engineer your solution to a standard you consider suitable for
 production. It is not required to provide any graphical output showing the
 movement of the toy robot.
+
+Please do not put your name in any of the submitted code since this makes it harder for us to review your submission anonymously.
