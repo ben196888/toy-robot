@@ -28,14 +28,15 @@ const validator = (cmd) => {
     throw new Error('Command not found');
   }
   console.debug(`Command validated`);
+  return idx;
 };
 
 rl.on('line', (input) => {
   console.debug(`Get input ${input}`);
-  validator(input)
-  proc(input);
+  const cmdIdx = validator(input);
+  proc(cmdIdx, input);
 });
 
-const proc = cmd => {
+const proc = (cmdIdx, cmd) => {
   // TODO: do the command
 };
