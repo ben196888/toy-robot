@@ -5,4 +5,4 @@ const getArgs = require('./argHelper').getArgs;
 const { inputFilename, outputFilename } = getArgs();
 
 io.init(inputFilename, outputFilename);
-io.onLine(robotCmdProcessor);
+io.onLine(cmd => robotCmdProcessor(cmd, io));

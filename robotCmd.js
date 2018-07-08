@@ -58,7 +58,7 @@ const initCmdParser = initCmd => {
   };
 };
 
-function processor(cmd) {
+function processor(cmd, io) {
   const cmdIdx = validator(cmd);
   switch (cmdIdx) {
   case 0:
