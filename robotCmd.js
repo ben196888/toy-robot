@@ -35,7 +35,8 @@ const validator = (cmd) => {
   return idx;
 };
 
-const processor = (cmdIdx, cmd) => {
+function processor(cmd) {
+  const cmdIdx = validator(cmd);
   switch (cmdIdx) {
   case 0:
     // initialise
@@ -88,6 +89,5 @@ const initCmdParser = initCmd => {
 };
 
 module.exports = {
-  validator,
   processor,
 };

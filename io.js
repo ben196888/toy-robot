@@ -21,12 +21,11 @@ function init(input, output, options = {}) {
   });
 }
 
-function onLine(cmdValidator, cmdProcessor) {
+function onLine(listener) {
   validator();
   rl.on('line', (input) => {
     console.debug(`Get input ${input}`);
-    const cmdIdx = cmdValidator(input);
-    cmdProcessor(cmdIdx, input);
+    listener(input);
   });
 }
 

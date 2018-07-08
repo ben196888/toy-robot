@@ -1,5 +1,5 @@
 const io = require('./io');
-const robotCmd = require('./robotCmd');
+const robotCmdProcessor = require('./robotCmd').processor;
 
 io.init(process.stdin, process.stdout);
-io.onLine(robotCmd.validator, robotCmd.processor);
+io.onLine(robotCmdProcessor);
