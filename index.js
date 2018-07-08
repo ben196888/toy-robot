@@ -39,4 +39,21 @@ rl.on('line', (input) => {
 
 const proc = (cmdIdx, cmd) => {
   // TODO: do the command
+  switch (cmdIdx) {
+  case 0:
+    // initialise
+    break;
+  case 1:
+    // move
+    break;
+  case 2:
+  case 3:
+    // rotate
+    break;
+  case 4:
+    // report
+    break;
+  default:
+    throw new Error('Unknown valid command');
+  }
 };
