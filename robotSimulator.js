@@ -52,6 +52,30 @@ class RobotSimulator {
     this.facingIdx = (this.facingIdx + sign * 1 + facingsLen) % facingsLen;
   }
 
+  move (/* steps */) {
+    // The origin (0,0) can be considered to be the SOUTH WEST most corner.
+    // even facing idx means on NORTH and SOUTH direction => modify x
+    // odd facing idx means on EAST and WEST direction => modify y
+    const steps = 1;
+    const modifyY = Boolean(this.facingIdx % 2);
+    const modifyX = !modifyY;
+    const direction = Boolean(this.facingIdx / 2);
+    const sign = direction ? (-1) : (+1);
+
+    const { x, y } = this.position;
+    let newX = modifyX ? x + sign * steps : x;
+    let newY = modifyY ? y + sign * steps : y;
+    if (!validPosition(newX) || !validPosition(newY)) {
+      console.warn('Move cause robot to fall. Ingore this move.');
+      [newX, newY] = [x, y];
+    }
+    const position = {
+      x: newX,
+      y: newY,
+    };
+    this.position = position;
+  }
+
   report () {
     const { x, y } = this.position;
     const facing = VALID_FACINGS[this.facingIdx];
