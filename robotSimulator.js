@@ -5,10 +5,16 @@ const VALID_FACINGS = [
   'SOUTH',
   'WEST',
 ];
+const VALID_ROTATIONS = [
+  'LEFT',
+  'RIGHT',
+];
 
 const validPosition = pos => (0 <= pos && pos < BOARD_SIZE);
 const getFacingIdx = facing => VALID_FACINGS.findIndex(f => facing === f);
 const validFacing = facing => (getFacingIdx(facing) >= 0);
+const getRotationIdx = rotation => VALID_ROTATIONS.findIndex(r => rotation === r);
+const validRotation = rotation => (getRotationIdx(rotation) >= 0);
 
 class RobotSimulator {
   constructor (args) {
@@ -31,6 +37,18 @@ class RobotSimulator {
     console.debug(`Place new robot on ${x}, ${y} and facing ${facing}`);
     this.position = position;
     this.facingIdx = getFacingIdx(facing);
+  }
+
+  rotate (rotation) {
+    if (!validRotation(rotation)) {
+      throw new Error(`Rotation ${rotation} is invalid`);
+    }
+    const facingsLen = VALID_FACINGS.length;
+    const rotationIdx = getRotationIdx(rotation);
+    // idx === 0: turn left => facingIdx - 1
+    // idx === 1: turn right => facingIdx + 1
+    const sign = rotationIdx ? (+1) : (-1);
+    this.facingIdx = (this.facingIdx + sign * 1 + facingsLen) % facingsLen;
   }
 
   report () {
