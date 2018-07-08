@@ -35,6 +35,29 @@ const validator = (cmd) => {
   return idx;
 };
 
+const initCmdParser = initCmd => {
+  console.debug('Parse init cmd');
+  const parsedInitCmd = initCmd.split(' ');
+  if (parsedInitCmd.length !== 2) {
+    throw new Error(`${initCmd} should be in format 'PLACE X,Y,F'`);
+  }
+
+  // position and facing
+  const posAndFace = parsedInitCmd[1];
+  const parsedPosAndFace = posAndFace.split(',');
+  if (parsedPosAndFace.length !== 3) {
+    throw new Error(`${posAndFace} should be in format X,Y,F`);
+  }
+
+  const [x, y, facing] = parsedPosAndFace;
+  const position = { x, y };
+  console.debug('Parsed init cmd args (position, facing)');
+  return {
+    position,
+    facing,
+  };
+};
+
 function processor(cmd) {
   const cmdIdx = validator(cmd);
   switch (cmdIdx) {
@@ -63,29 +86,6 @@ function processor(cmd) {
   default:
     throw new Error('Unknown valid command');
   }
-};
-
-const initCmdParser = initCmd => {
-  console.debug('Parse init cmd');
-  const parsedInitCmd = initCmd.split(' ');
-  if (parsedInitCmd.length !== 2) {
-    throw new Error(`${initCmd} should be in format 'PLACE X,Y,F'`);
-  }
-
-  // position and facing
-  const posAndFace = parsedInitCmd[1];
-  const parsedPosAndFace = posAndFace.split(',');
-  if (parsedPosAndFace.length !== 3) {
-    throw new Error(`${posAndFace} should be in format X,Y,F`);
-  }
-
-  const [x, y, facing] = parsedPosAndFace;
-  const position = { x, y };
-  console.debug('Parsed init cmd args (position, facing)');
-  return {
-    position,
-    facing,
-  };
 };
 
 module.exports = {
