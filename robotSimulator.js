@@ -32,6 +32,12 @@ class RobotSimulator {
     this.position = position;
     this.facingIdx = getFacingIdx(facing);
   }
+
+  report () {
+    const { x, y } = this.position;
+    const facing = VALID_FACINGS[this.facingIdx];
+    return `${x},${y},${facing}\n`;
+  }
 }
 
 module.exports = RobotSimulator;
