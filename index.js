@@ -3,8 +3,11 @@ const robotSimulator = require('./robotSimulator');
 
 let robot;
 const robotValidator = () => {
+  // A robot that is not on the table can choose
+  // then ignore the MOVE, LEFT, RIGHT and REPORT commands.
   if (!robot) {
-    throw new Error('Robot is not placed yet.');
+    // throw new Error('Robot is not placed yet.');
+    console.warn('Robot is not placed yet. Ignore commands');
   }
 };
 
