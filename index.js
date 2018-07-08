@@ -57,6 +57,7 @@ const proc = (cmdIdx, cmd) => {
   case 1:
     // move
     robotValidator();
+    robot.move();
     break;
   case 2:
   case 3:
