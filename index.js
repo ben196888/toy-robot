@@ -1,4 +1,4 @@
-const readline = require('readline');
+const io = require('./io');
 const robotSimulator = require('./robotSimulator');
 
 let robot;
@@ -10,12 +10,6 @@ const robotValidator = () => {
     console.warn('Robot is not placed yet. Ignore commands');
   }
 };
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  prompt: '',
-});
 
 /** VALID COMMANDS
  * PLACE X,Y,F
@@ -33,7 +27,7 @@ const validStartsWith = [
   'REPORT',
 ];
 
-const validator = (cmd) => {
+const cmdValidator = (cmd) => {
   console.debug(`Validate ${cmd}`);
   const idx = validStartsWith.findIndex(str => cmd.startsWith(str));
   if (idx < 0) {
@@ -43,14 +37,7 @@ const validator = (cmd) => {
   return idx;
 };
 
-rl.on('line', (input) => {
-  console.debug(`Get input ${input}`);
-  const cmdIdx = validator(input);
-  proc(cmdIdx, input);
-});
-
-const proc = (cmdIdx, cmd) => {
-  // TODO: do the command
+const cmdProcessor = (cmdIdx, cmd) => {
   switch (cmdIdx) {
   case 0:
     // initialise
@@ -72,8 +59,7 @@ const proc = (cmdIdx, cmd) => {
     // report
     robotValidator();
     const report = robot.report();
-    rl.setPrompt(report);
-    rl.prompt();
+    io.print(report);
     break;
   default:
     throw new Error('Unknown valid command');
@@ -102,3 +88,6 @@ const initCmdParser = initCmd => {
     facing,
   };
 };
+
+io.init(process.stdin, process.stdout);
+io.onLine(cmdValidator, cmdProcessor);
