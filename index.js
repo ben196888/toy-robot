@@ -66,6 +66,9 @@ const proc = (cmdIdx, cmd) => {
   case 4:
     // report
     robotValidator();
+    const report = robot.report();
+    rl.setPrompt(report);
+    rl.prompt();
     break;
   default:
     throw new Error('Unknown valid command');
