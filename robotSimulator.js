@@ -54,12 +54,12 @@ class RobotSimulator {
 
   move (/* steps */) {
     // The origin (0,0) can be considered to be the SOUTH WEST most corner.
-    // even facing idx means on NORTH and SOUTH direction => modify x
-    // odd facing idx means on EAST and WEST direction => modify y
+    // odd facing idx means on EAST and WEST direction => modify x
+    // even facing idx means on NORTH and SOUTH direction => modify y
     const steps = 1;
-    const modifyY = Boolean(this.facingIdx % 2);
-    const modifyX = !modifyY;
-    const direction = Boolean(this.facingIdx / 2);
+    const modifyX = Boolean(this.facingIdx % 2);
+    const modifyY = !modifyX;
+    const direction = Boolean(this.facingIdx >> 1);
     const sign = direction ? (-1) : (+1);
 
     const { x, y } = this.position;
