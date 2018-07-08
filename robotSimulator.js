@@ -26,7 +26,8 @@ class RobotSimulator {
       throw new Error('Facing is required');
     }
 
-    const { x, y } = position;
+    const x = parseInt(position.x, 10);
+    const y = parseInt(position.y, 10);
     if (!validPosition(x) || !validPosition(y)) {
       throw new Error(`Position ${x}, ${y} is invalid`);
     }
@@ -35,7 +36,7 @@ class RobotSimulator {
     }
 
     console.debug(`Place new robot on ${x}, ${y} and facing ${facing}`);
-    this.position = position;
+    this.position = { x, y };
     this.facingIdx = getFacingIdx(facing);
   }
 
