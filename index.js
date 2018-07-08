@@ -62,6 +62,7 @@ const proc = (cmdIdx, cmd) => {
   case 3:
     // rotate
     robotValidator();
+    robot.rotate(cmd);
     break;
   case 4:
     // report
