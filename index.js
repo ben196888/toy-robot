@@ -1,4 +1,12 @@
 const readline = require('readline');
+const robotSimulator = require('./robotSimulator');
+
+let robot;
+const robotValidator = () => {
+  if (!robot) {
+    throw new Error('Robot is not placed yet.');
+  }
+};
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -42,16 +50,21 @@ const proc = (cmdIdx, cmd) => {
   switch (cmdIdx) {
   case 0:
     // initialise
+    const initCmdArgs = initCmdParser(cmd);
+    robot = new robotSimulator(initCmdArgs);
     break;
   case 1:
     // move
+    robotValidator();
     break;
   case 2:
   case 3:
     // rotate
+    robotValidator();
     break;
   case 4:
     // report
+    robotValidator();
     break;
   default:
     throw new Error('Unknown valid command');
