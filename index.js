@@ -1,5 +1,8 @@
 const io = require('./io');
 const robotCmdProcessor = require('./robotCmd').processor;
+const getArgs = require('./argHelper').getArgs;
 
-io.init(process.stdin, process.stdout);
+const { inputFilename, outputFilename } = getArgs();
+
+io.init(inputFilename, outputFilename);
 io.onLine(robotCmdProcessor);
