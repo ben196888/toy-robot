@@ -27,7 +27,11 @@ const VALID_COMMANDS = [
 
 const validator = (cmd) => {
   console.debug(`Validate ${cmd}`);
-  const idx = VALID_COMMANDS.findIndex(str => cmd.startsWith(str));
+  const trimmedCmd = cmd.trim();
+  if (trimmedCmd === '') {
+    return -1;
+  }
+  const idx = VALID_COMMANDS.findIndex(str => trimmedCmd.startsWith(str));
   if (idx < 0) {
     throw new Error('Command not found');
   }
@@ -61,6 +65,9 @@ const initCmdParser = initCmd => {
 function processor(cmd, io) {
   const cmdIdx = validator(cmd);
   switch (cmdIdx) {
+  case -1:
+    // special case: ignore empty line
+    break;
   case 0:
     // initialise
     const initCmdArgs = initCmdParser(cmd);
