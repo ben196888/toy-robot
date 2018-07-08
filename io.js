@@ -1,4 +1,5 @@
 const readline = require('readline');
+const fs = require('fs');
 
 let rl;
 const validator = () => {
@@ -7,10 +8,23 @@ const validator = () => {
   }
 }
 
-function init(input, output, options = {}) {
+function init(inputFilename, outputFilename, options = {}) {
+  let input, output;
   // Ignore init when rl is initialised
   if (rl) {
     return;
+  }
+
+  if (inputFilename.toLowerCase() === 'stdin') {
+    input = process.stdin;
+  } else {
+    input = fs.createReadStream(inputFilename);
+  }
+
+  if (outputFilename.toLowerCase() === 'stdout') {
+    output = process.stdout;
+  } else {
+    output = fs.createWriteStream(outputFilename);
   }
 
   rl = readline.createInterface({
