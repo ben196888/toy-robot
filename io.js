@@ -7,7 +7,7 @@ const validator = () => {
   if (!rl) {
     throw new Error('readline is not initialised.');
   }
-}
+};
 
 function init(inputFilename, outputFilename, options = {}) {
   let input, output;

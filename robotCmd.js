@@ -71,8 +71,7 @@ function processor(cmd, io) {
     break;
   case 0:
     // initialise
-    const initCmdArgs = initCmdParser(cmd);
-    robot = new robotSimulator(initCmdArgs);
+    robot = new robotSimulator(initCmdParser(cmd));
     break;
   case 1:
     // move
@@ -88,13 +87,12 @@ function processor(cmd, io) {
   case 4:
     // report
     robotValidator();
-    const report = robot.report();
-    io.print(report);
+    io.print(robot.report());
     break;
   default:
     throw new Error('Unknown valid command');
   }
-};
+}
 
 module.exports = {
   processor,
