@@ -1,5 +1,7 @@
+const log = require('./log');
+
 const printOnErrorMsg = () => {
-  console.error('\
+  log.error('\
 node index.js input output\n\
 Example: node index.js stdin stdout\n\
          node index.js inputfile.txt stdout\n\

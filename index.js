@@ -1,3 +1,4 @@
+require('./log');
 const io = require('./io');
 const robotCmdProcessor = require('./robotCmd').processor;
 const getArgs = require('./argHelper').getArgs;

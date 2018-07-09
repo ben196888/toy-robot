@@ -1,3 +1,5 @@
+const log = require('./log');
+
 const BOARD_SIZE = 5;
 const VALID_FACINGS = [
   'NORTH',
@@ -35,7 +37,7 @@ class RobotSimulator {
       throw new Error(`Facing ${facing} is invalid`);
     }
 
-    console.debug(`Place new robot on ${x}, ${y} and facing ${facing}`);
+    log.debug(`Place new robot on ${x}, ${y} and facing ${facing}`);
     this.position = { x, y };
     this.facingIdx = getFacingIdx(facing);
   }
@@ -66,7 +68,7 @@ class RobotSimulator {
     let newX = modifyX ? x + sign * steps : x;
     let newY = modifyY ? y + sign * steps : y;
     if (!validPosition(newX) || !validPosition(newY)) {
-      console.warn('Move cause robot to fall. Ingore this move.');
+      log.warn('Move cause robot to fall. Ingore this move.');
       [newX, newY] = [x, y];
     }
     const position = {

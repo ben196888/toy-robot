@@ -1,5 +1,6 @@
 const readline = require('readline');
 const fs = require('fs');
+const log = require('./log');
 
 let rl;
 const validator = () => {
@@ -38,7 +39,7 @@ function init(inputFilename, outputFilename, options = {}) {
 function onLine(listener) {
   validator();
   rl.on('line', (input) => {
-    console.debug(`Get input ${input}`);
+    log.debug(`Get input ${input}`);
     listener(input);
   });
 }

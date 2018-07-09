@@ -1,4 +1,5 @@
 const robotSimulator = require('./robotSimulator');
+const log = require('./log');
 
 let robot;
 const robotValidator = () => {
@@ -6,7 +7,7 @@ const robotValidator = () => {
   // then ignore the MOVE, LEFT, RIGHT and REPORT commands.
   if (!robot) {
     // throw new Error('Robot is not placed yet.');
-    console.warn('Robot is not placed yet. Ignore commands');
+    log.warn('Robot is not placed yet. Ignore commands');
   }
 };
 
@@ -26,7 +27,7 @@ const VALID_COMMANDS = [
 ];
 
 const validator = (cmd) => {
-  console.debug(`Validate ${cmd}`);
+  log.debug(`Validate ${cmd}`);
   const trimmedCmd = cmd.trim();
   if (trimmedCmd === '') {
     return -1;
@@ -35,12 +36,12 @@ const validator = (cmd) => {
   if (idx < 0) {
     throw new Error('Command not found');
   }
-  console.debug(`Command validated`);
+  log.debug('Command validated');
   return idx;
 };
 
 const initCmdParser = initCmd => {
-  console.debug('Parse init cmd');
+  log.debug('Parse init cmd');
   const parsedInitCmd = initCmd.split(' ');
   if (parsedInitCmd.length !== 2) {
     throw new Error(`${initCmd} should be in format 'PLACE X,Y,F'`);
@@ -55,7 +56,7 @@ const initCmdParser = initCmd => {
 
   const [x, y, facing] = parsedPosAndFace;
   const position = { x, y };
-  console.debug('Parsed init cmd args (position, facing)');
+  log.debug('Parsed init cmd args (position, facing)');
   return {
     position,
     facing,
