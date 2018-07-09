@@ -14,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "log": "^1.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.1.0"
   }
 }
