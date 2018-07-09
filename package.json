@@ -4,7 +4,8 @@
   "description": "toy-robot-simulator for RAE",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js stdin stdout"
+    "start": "node index.js stdin stdout",
+    "lint": "eslint *.js"
   },
   "repository": {
     "type": "git",
