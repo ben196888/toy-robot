@@ -48,10 +48,10 @@ describe('io', function() {
   });
 
   describe('validator', function() {
-    it('should throw an error if init function has not been called', function() {
+    it('should throw an error if not inited', function() {
       expect(io.validator).to.throw('readline is not initialised.');
     });
-    it('should not throw error after init has been called', function() {
+    it('should not throw error after inited', function() {
       io.init(STDIN, STDOUT);
       expect(io.validator).not.throw();
     });
