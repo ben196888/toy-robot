@@ -47,14 +47,14 @@ function onLine(listener) {
   });
 }
 
-function print(str) {
+function println(str) {
   validator();
-  rl.setPrompt(str);
+  rl.setPrompt(`${str}\n`);
   rl.prompt();
 }
 
 module.exports = {
   init,
   onLine,
-  print,
+  println,
 };

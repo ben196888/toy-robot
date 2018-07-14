@@ -87,7 +87,7 @@ function processor(cmd, io) {
   case 4:
     // report
     robotValidator();
-    io.print(robot.report());
+    io.println(robot.report());
     break;
   default:
     throw new Error('Unknown valid command');

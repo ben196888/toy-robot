@@ -96,7 +96,7 @@ describe('robot simulator', function() {
       robot = new RobotSimulator({ position: VALID_POSISION, facing: VALID_FACING });
     });
     it('should report robot\'s position and facing in format X,Y,F', function() {
-      expect(robot.report()).to.equal('0,3,NORTH\n');
+      expect(robot.report()).to.equal('0,3,NORTH');
     });
   });
 });

@@ -81,7 +81,7 @@ class RobotSimulator {
   report () {
     const { x, y } = this.position;
     const facing = VALID_FACINGS[this.facingIdx];
-    return `${x},${y},${facing}\n`;
+    return `${x},${y},${facing}`;
   }
 }
 
