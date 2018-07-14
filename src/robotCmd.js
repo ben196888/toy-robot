@@ -1,4 +1,4 @@
-const robotSimulator = require('./robotSimulator');
+const RobotSimulator = require('./robotSimulator');
 const log = require('./log');
 
 let robot;
@@ -71,7 +71,7 @@ function processor(cmd, io) {
     break;
   case 0:
     // initialise
-    robot = new robotSimulator(initCmdParser(cmd));
+    robot = new RobotSimulator(initCmdParser(cmd));
     break;
   case 1:
     // move
