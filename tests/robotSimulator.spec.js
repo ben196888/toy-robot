@@ -69,4 +69,24 @@ describe('robot simulator', function() {
       expect(robot).to.have.property('facingIdx', 3);
     });
   });
+
+  describe('move', function() {
+    let robot;
+    beforeEach(function() {
+      robot = new RobotSimulator({ position: VALID_POSISION, facing: VALID_FACING });
+    });
+    it('should move from (0, 3) to (0, 4) when robot is facing NORTH', function() {
+      robot.move();
+      expect(robot).to.have.property('position').to.deep.equal({ x: 0, y: 4 });
+    });
+
+    it('should not move out of board when robot is on the edge', function() {
+      // robot is on (0, 3) and facing north
+      // rotate LEFT to facing WEST
+      // robot have to stay on (0, 3) after move command
+      robot.rotate('LEFT');
+      robot.move();
+      expect(robot).to.have.property('position').to.deep.equal({ x: 0, y: 3 });
+    });
+  });
 });
