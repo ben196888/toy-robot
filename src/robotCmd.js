@@ -96,4 +96,6 @@ function processor(cmd, io) {
 
 module.exports = {
   processor,
+  validator,
+  robotValidator,
 };
