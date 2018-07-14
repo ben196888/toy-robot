@@ -13,6 +13,25 @@ Please execute following command before you start the simulator
 nvm use
 ```
 
+## Installation
+
+You have to install the dependencies through `npm`.
+```shell
+npm install
+```
+
+## Linting
+
+```shell
+npm run lint
+```
+
+## Unit tests
+
+```shell
+npm test
+```
+
 ## How to start
 
 This program allows standard and file input/output.
@@ -21,22 +40,27 @@ It's really easy to execute the program in terminal.
 The command is as following, and input/output can be `stdin`/`stdout` or a filename.
 
 ```shell
-node index.js input output
+node src/index.js input output
 ```
 
-Here are some examples:
+or you can simply run:
+```shell
+npm start
+```
+
+Here are some other examples:
 
 Read data from standard input then output to terminal
 ```shell
-node index.js stdin stdout
+node src/index.js stdin stdout
 ```
 
 Read data from a file then output to terminal
 ``` shell
-node index.js input1.txt stdout
+node src/index.js input1.txt stdout
 ```
 
 Read data from a file then output to a file
 ```
-node index.js input.txt output.txt
+node src/index.js input.txt output.txt
 ```
