@@ -15,8 +15,12 @@ const STDOUT = 'stdout';
 describe('io', function() {
   const sandbox = sinon.createSandbox();
   let io;
+  let onStub;
   beforeEach(function() {
-    sandbox.stub(readline, 'createInterface').returns({});
+    onStub = sandbox.stub();
+    sandbox.stub(readline, 'createInterface').returns({
+      on: onStub,
+    });
     sandbox.stub(path, 'join').returns('/some/path');
     io = requireUncached('../src/io');
   });
@@ -54,6 +58,18 @@ describe('io', function() {
     it('should not throw error after inited', function() {
       io.init(STDIN, STDOUT);
       expect(io.validator).not.throw();
+    });
+  });
+
+  describe('onLine', function() {
+    it('should throw error if not inited', function() {
+      expect(io.onLine).to.throw('readline is not initialised.');
+    });
+    it('should listen on-line event', function() {
+      io.init(STDIN, STDOUT);
+      io.onLine(() => null);
+      sinon.assert.calledOnce(onStub);
+      sinon.assert.calledWith(onStub, 'line');
     });
   });
 });
