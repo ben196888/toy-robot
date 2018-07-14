@@ -57,4 +57,5 @@ module.exports = {
   init,
   onLine,
   println,
+  validator,
 };

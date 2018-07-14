@@ -1,8 +1,11 @@
+const chai = require('chai');
 const sinon = require('sinon');
 const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
 const { requireUncached } = require('./helpers');
+
+const expect = chai.expect;
 
 const INPUT_FILE_NAME = 'input.txt';
 const OUTPUT_FILE_NAME = 'output.txt';
@@ -41,6 +44,16 @@ describe('io', function() {
       const createWriteStreamStub = sandbox.stub(fs, 'createWriteStream').returns(OUTPUT_FILE_NAME);
       io.init(STDIN, OUTPUT_FILE_NAME);
       sinon.assert.calledOnce(createWriteStreamStub);
+    });
+  });
+
+  describe('validator', function() {
+    it('should throw an error if init function has not been called', function() {
+      expect(io.validator).to.throw('readline is not initialised.');
+    });
+    it('should not throw error after init has been called', function() {
+      io.init(STDIN, STDOUT);
+      expect(io.validator).not.throw();
     });
   });
 });
