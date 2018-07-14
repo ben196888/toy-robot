@@ -1,5 +1,6 @@
 const readline = require('readline');
 const fs = require('fs');
+const path = require('path');
 const log = require('./log');
 
 let rl;
@@ -19,13 +20,15 @@ function init(inputFilename, outputFilename, options = {}) {
   if (inputFilename.toLowerCase() === 'stdin') {
     input = process.stdin;
   } else {
-    input = fs.createReadStream(inputFilename);
+    const inputPath = path.join(__dirname, '..', inputFilename);
+    input = fs.createReadStream(inputPath);
   }
 
   if (outputFilename.toLowerCase() === 'stdout') {
     output = process.stdout;
   } else {
-    output = fs.createWriteStream(outputFilename);
+    const outputPath = path.join(__dirname, '..', outputFilename);
+    output = fs.createWriteStream(outputPath);
   }
 
   rl = readline.createInterface({
