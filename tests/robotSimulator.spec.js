@@ -48,4 +48,25 @@ describe('robot simulator', function() {
       expect(robot.report).to.be.a('function');
     });
   });
+
+  describe('rotate', function() {
+    let robot;
+    beforeEach(function() {
+      robot = new RobotSimulator({ position: VALID_POSISION, facing: VALID_FACING });
+    });
+    it('should throw an error when invalid rotation', function() {
+      const invalidRotate = () => robot.rotate('invalid rotation');
+      expect(invalidRotate).to.throw('Rotation invalid rotation is invalid');
+    });
+
+    it('should rotate from NORTH (idx: 0) to EAST (idx: 1) when rotation RIGHT', function() {
+      robot.rotate('RIGHT');
+      expect(robot).to.have.property('facingIdx', 1);
+    });
+
+    it('should rotate from NORTH (idx: 0) to WEST (idx: 3) when rotation LEFT', function() {
+      robot.rotate('LEFT');
+      expect(robot).to.have.property('facingIdx', 3);
+    });
+  });
 });
