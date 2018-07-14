@@ -20,15 +20,15 @@ describe('argHelper', function() {
     process.argv = cachedProcessArgv;
   });
   describe('exitWhenNotEnoughArgs', function() {
-    let processExitStub;
+    let logErrorStub, processExitStub;
     beforeEach(function() {
       process.argv = INVALID_ARGV;
+      logErrorStub = sandbox.stub(log, 'error').callsFake(() => null);
       processExitStub = sandbox.stub(process, 'exit').callsFake(() => null);
     });
     it('should log the error message', function() {
-      const logErrorSpy = sandbox.spy(log, 'error');
       argHelper.exitWhenNotEnoughArgs();
-      sinon.assert.calledOnce(logErrorSpy);
+      sinon.assert.calledOnce(logErrorStub);
     });
     it('should terminate the process', function() {
       argHelper.exitWhenNotEnoughArgs();
@@ -36,9 +36,8 @@ describe('argHelper', function() {
       sinon.assert.calledWith(processExitStub, 1);
     });
     it('should terminate after log the error message', function() {
-      const logErrorSpy = sandbox.spy(log, 'error');
       argHelper.exitWhenNotEnoughArgs();
-      expect(logErrorSpy.calledBefore(processExitStub)).to.be.true;
+      expect(logErrorStub.calledBefore(processExitStub)).to.be.true;
     });
   });
 
