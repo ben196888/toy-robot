@@ -7,7 +7,7 @@ const robotValidator = () => {
   // then ignore the MOVE, LEFT, RIGHT and REPORT commands.
   if (!robot) {
     // throw new Error('Robot is not placed yet.');
-    log.warn('Robot is not placed yet. Ignore commands');
+    log.warning('Robot is not placed yet. Ignore commands');
   }
 };
 
