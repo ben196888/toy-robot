@@ -1,7 +1,9 @@
 require('./log');
 const io = require('./io');
 const robotCmdProcessor = require('./robotCmd').processor;
-const getArgs = require('./argHelper').getArgs;
+const { exitWhenNotEnoughArgs, getArgs } = require('./argHelper');
+
+exitWhenNotEnoughArgs();
 
 const { inputFilename, outputFilename } = getArgs();
 

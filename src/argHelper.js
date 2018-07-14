@@ -9,9 +9,11 @@ Example: node src/index.js stdin stdout\n\
          node src/index.js inputfile.txt outputfile.txt');
 };
 
-if (process.argv.length !== 4) {
-  printOnErrorMsg();
-  process.exit(1);
+function exitWhenNotEnoughArgs() {
+  if (process.argv.length !== 4) {
+    printOnErrorMsg();
+    process.exit(1);
+  }
 }
 
 function getArgs() {
@@ -24,5 +26,6 @@ function getArgs() {
 }
 
 module.exports = {
+  exitWhenNotEnoughArgs,
   getArgs,
 };
