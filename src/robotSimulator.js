@@ -68,7 +68,7 @@ class RobotSimulator {
     let newX = modifyX ? x + sign * steps : x;
     let newY = modifyY ? y + sign * steps : y;
     if (!validPosition(newX) || !validPosition(newY)) {
-      log.warn('Move cause robot to fall. Ingore this move.');
+      log.warning('Move cause robot to fall. Ingore this move.');
       [newX, newY] = [x, y];
     }
     const position = {
