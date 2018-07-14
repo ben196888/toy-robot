@@ -4,7 +4,6 @@ const RobotSimulator = require('../src/robotSimulator');
 const expect = chai.expect;
 
 const newRobotSimulator = (args) => () => new RobotSimulator(args);
-;
 
 describe('robot simulator', function() {
   const VALID_POSISION = {
