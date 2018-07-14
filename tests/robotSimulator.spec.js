@@ -89,4 +89,14 @@ describe('robot simulator', function() {
       expect(robot).to.have.property('position').to.deep.equal({ x: 0, y: 3 });
     });
   });
+
+  describe('report', function() {
+    let robot;
+    beforeEach(function() {
+      robot = new RobotSimulator({ position: VALID_POSISION, facing: VALID_FACING });
+    });
+    it('should report robot\'s position and facing in format X,Y,F', function() {
+      expect(robot.report()).to.equal('0,3,NORTH\n');
+    });
+  });
 });
