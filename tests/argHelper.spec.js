@@ -6,6 +6,7 @@ const log = require('../src/log');
 const expect = chai.expect;
 
 const INVALID_ARGV = ['node', 'src/index.js'];
+const VALID_ARGV = ['node', 'src/index.js', 'stdin', 'stdout'];
 
 describe('argHelper', function() {
   const sandbox = sinon.createSandbox();
@@ -38,6 +39,18 @@ describe('argHelper', function() {
       const logErrorSpy = sandbox.spy(log, 'error');
       argHelper.exitWhenNotEnoughArgs();
       expect(logErrorSpy.calledBefore(processExitStub)).to.be.true;
+    });
+  });
+
+  describe('getArgs', function() {
+    beforeEach(function() {
+      process.argv = VALID_ARGV;
+    });
+    it('should get argv[2] as inputFilename and argv[3] as outputFilename', function() {
+      expect(argHelper.getArgs()).to.deep.equal({
+        inputFilename: 'stdin',
+        outputFilename: 'stdout',
+      });
     });
   });
 });
