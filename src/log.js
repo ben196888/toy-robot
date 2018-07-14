@@ -1,5 +1,5 @@
 const Log = require('log');
-const LOG_LEVEL = 'debug';
+const LOG_LEVEL = process.env.ENV === 'development' ? 'debug' : 'error';
 
 const logger = new Log(LOG_LEVEL);
 
