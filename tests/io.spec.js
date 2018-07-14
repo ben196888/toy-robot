@@ -15,11 +15,15 @@ const STDOUT = 'stdout';
 describe('io', function() {
   const sandbox = sinon.createSandbox();
   let io;
-  let onStub;
+  let onStub, setPromptStub, promptStub;
   beforeEach(function() {
     onStub = sandbox.stub();
+    setPromptStub = sandbox.stub();
+    promptStub = sandbox.stub();
     sandbox.stub(readline, 'createInterface').returns({
       on: onStub,
+      setPrompt: setPromptStub,
+      prompt: promptStub,
     });
     sandbox.stub(path, 'join').returns('/some/path');
     io = requireUncached('../src/io');
@@ -70,6 +74,20 @@ describe('io', function() {
       io.onLine(() => null);
       sinon.assert.calledOnce(onStub);
       sinon.assert.calledWith(onStub, 'line');
+    });
+  });
+
+  describe('println', function() {
+    it('should throw error if not inited', function() {
+      expect(io.println).to.throw('readline is not initialised.');
+    });
+    it('should setPrompt string with \\n then prompt the message.', function() {
+      io.init(STDIN, STDOUT);
+      io.println('test line');
+      sinon.assert.calledOnce(setPromptStub);
+      sinon.assert.calledWith(setPromptStub, 'test line\n');
+      sinon.assert.calledOnce(promptStub);
+      expect(promptStub.calledAfter(setPromptStub)).to.be.true;
     });
   });
 });
