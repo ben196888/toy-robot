@@ -1,7 +1,7 @@
 Toy Robot Simulator
 ===================
 
-A robot simulator for RAE.
+A robot simulator.
 
 ## Dependencies
 - nvm
