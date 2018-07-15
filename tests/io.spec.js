@@ -3,6 +3,7 @@ const sinon = require('sinon');
 const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
+// TODO: istanbul coverage cannot calculate coverage from requrieUncached
 const { requireUncached } = require('./helpers');
 
 const expect = chai.expect;
