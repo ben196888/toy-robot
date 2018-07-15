@@ -65,3 +65,19 @@ Read data from a file then output to a file
 ```
 node src/index.js input.txt output.txt
 ```
+
+## Real tests
+
+There are three test files, `test1.txt`, `test2.txt`, and `test3.txt` you can test with. Following shell command would get the robot commands from the test and post the result in terminal.
+
+```shell
+node src/index.js test1.txt stdout
+```
+
+## Development mode
+
+You can easily enable the debug message throgh assigning the environment variable `ENV` as `development`.
+
+```shell
+env ENV=development node src/index.js stdin stdout
+```
