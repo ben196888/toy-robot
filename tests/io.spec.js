@@ -9,18 +9,20 @@ const expect = chai.expect;
 
 const INPUT_FILE_NAME = 'input.txt';
 const OUTPUT_FILE_NAME = 'output.txt';
+const FAKE_READ_STREAM = 'FAKE_READ_STREAM';
+const FAKE_WRITE_STREAM = 'FAKE_WRITE_STREAM';
 const STDIN = 'stdin';
 const STDOUT = 'stdout';
 
 describe('io', function() {
   const sandbox = sinon.createSandbox();
   let io;
-  let onStub, setPromptStub, promptStub;
+  let readlineStub, onStub, setPromptStub, promptStub;
   beforeEach(function() {
     onStub = sandbox.stub();
     setPromptStub = sandbox.stub();
     promptStub = sandbox.stub();
-    sandbox.stub(readline, 'createInterface').returns({
+    readlineStub = sandbox.stub(readline, 'createInterface').returns({
       on: onStub,
       setPrompt: setPromptStub,
       prompt: promptStub,
@@ -53,6 +55,38 @@ describe('io', function() {
         const createWriteStreamStub = sandbox.stub(fs, 'createWriteStream').returns(FAKE_WRITE_STREAM);
         io.init(STDIN, OUTPUT_FILE_NAME);
         sinon.assert.calledOnce(createWriteStreamStub);
+      });
+    });
+
+    describe('create readline interface', function() {
+      it('should create interface with empty prompt', function() {
+        io.init(STDIN, STDOUT);
+        sinon.assert.calledOnce(readlineStub);
+        sinon.assert.calledWithMatch(readlineStub, { prompt: '' });
+      });
+      it('should create interface with stdin and stdout', function() {
+        io.init(STDIN, STDOUT);
+        sinon.assert.calledOnce(readlineStub);
+        sinon.assert.calledWithMatch(readlineStub, { input: process.stdin, output: process.stdout });
+      });
+      it('should create interface with input stream and stdout', function() {
+        sandbox.stub(fs, 'createReadStream').returns(FAKE_READ_STREAM);
+        io.init(INPUT_FILE_NAME, STDOUT);
+        sinon.assert.calledOnce(readlineStub);
+        sinon.assert.calledWithMatch(readlineStub, { input: FAKE_READ_STREAM, output: process.stdout });
+      });
+      it('should create interface with stdin and output stream', function() {
+        sandbox.stub(fs, 'createWriteStream').returns(FAKE_WRITE_STREAM);
+        io.init(STDIN, OUTPUT_FILE_NAME);
+        sinon.assert.calledOnce(readlineStub);
+        sinon.assert.calledWithMatch(readlineStub, { input: process.stdin, output: FAKE_WRITE_STREAM });
+      });
+      it('should create interface with input stream and output stream', function() {
+        sandbox.stub(fs, 'createReadStream').returns(FAKE_READ_STREAM);
+        sandbox.stub(fs, 'createWriteStream').returns(FAKE_WRITE_STREAM);
+        io.init(INPUT_FILE_NAME, OUTPUT_FILE_NAME);
+        sinon.assert.calledOnce(readlineStub);
+        sinon.assert.calledWithMatch(readlineStub, { input: FAKE_READ_STREAM, output: FAKE_WRITE_STREAM });
       });
     });
   });
