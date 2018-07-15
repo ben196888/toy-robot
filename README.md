@@ -4,6 +4,7 @@ Toy Robot Simulator
 A robot simulator.
 
 ## Dependencies
+- node v10.5.0
 - nvm
 
 ## Before you start
